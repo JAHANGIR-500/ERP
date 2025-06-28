@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Bill</title>
+    <style>
+        label {
+            font-size: 17px;
+            font-weight: bold;
+            color: Black;
+        }
+        .delete-button {
+            background: #dc3545;
+        }
+        .delete-button:hover {
+            background: #b3001d;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Contractor Bill</h2>
+        <form method="POST" action="{% url 'contractor_bill' %}">  <!-- Ensure correct action URL -->
+            {% csrf_token %}
+
+            <!-- ID Selection Dropdown -->
+            <label for="bill_id">Select Contractor Bill:</label>
+            <select id="bill_id" name="bill_id" onchange="window.location.href='?bill_id=' + this.value;">
+                <option value="">Create New</option>
+                {% for bill in contractor_bills %}
+                    <option value="{{ bill.id }}" {% if contractor_bill and contractor_bill.id == bill.id %}selected{% endif %}>
+                        {{ bill.id }} - {{ bill.name_of_project }}
+                    </option>
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <!-- Dynamic Form -->
+            {{ form.as_p }}
+            <div class="action-buttons">
+                {% if contractor_bill %}
+                    <button type="submit" class="btn">Update</button>
+                    <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                {% else %}
+                    <button type="submit" class="btn btn-success">Save</button>
+                {% endif %}
+            </div>
+            <br><br>
+            <!-- Navigation Buttons -->
+            <button type="button" class="btn btn-secondary" onclick="window.history.back();">🔙 Back</button>
+            <a href="{% url 'home' %}" class="btn">Home</a>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Filter Contractor Bills</h2>
+        <form method="GET" action="{% url 'contractor_bill' %}">  <!-- Ensure correct filtering path -->
+            <label for="project_name">Filter by Project Name:</label>
+            <input type="text" id="project_name" name="project_name" value="{{ project_name }}" placeholder="Enter Project Name">
+            <label for="bill_number">Filter by Bill Number:</label>
+            <input type="text" id="bill_number" name="bill_number" value="{{ bill_number }}" placeholder="Enter Bill Number">
+            <button type="submit" class="btn btn-success">Apply Filters</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Contractor Bills</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name of Project</th>
+                <th>Type of Project</th>
+                <th>Name of Work</th>
+                <th>Work Unit</th>
+                <th>Contractor's Company</th>
+                <th>Quantity</th>
+                <th>Unit Rate</th>
+                <th>Bill Amount</th>
+                <th>Actions</th>
+            </tr>
+            {% for bill in contractor_bills %}
+            <tr>
+                <td>{{ bill.id }}</td>
+                <td>{{ bill.name_of_project }}</td>
+                <td>{{ bill.type_of_project }}</td>
+                <td>{{ bill.name_of_work }}</td>
+                <td>{{ bill.work_unit }}</td>
+                <td>{{ bill.name_of_contractors_company }}</td>
+                <td>{{ bill.quantity }}</td>
+                <td>{{ bill.unit_rate }}</td>
+                <td>{{ bill.bill_amount }}</td>
+                <td class="action-buttons">
+                    <a href="{% url 'contractor_bill' %}?bill_id={{ bill.id }}" class="edit-button">✏ Edit</a>
+                    <a href="{% url 'contractor_bill' %}?bill_id={{ bill.id }}" class="delete-button">🗑 Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+
