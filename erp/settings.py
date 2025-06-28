@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-5zm*hq5#@p43-6uq)png8kszf)ppe8wuujk@(yd-eodnauzvi(
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.31.222', 'localhost', '127.0.0.1']
+
+
+ALLOWED_HOSTS = ['erp.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
