@@ -80,16 +80,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'erp.wsgi.application'
 
+
+
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'customer_db',
-        'USER': 'postgres',
-        'PASSWORD': 'DEFGdefg2345',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
+
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
