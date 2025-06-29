@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5zm*hq5#@p43-6uq)png8kszf)ppe8wuujk@(yd-eodnauzvi(
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = ['192.168.31.222', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -80,13 +80,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'erp.wsgi.application'
 
 
-
-import dj_database_url
-
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'customer_db',
+        'USER': 'postgres',
+        'PASSWORD': 'DEFGdefg2345',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
-
 
 
 
