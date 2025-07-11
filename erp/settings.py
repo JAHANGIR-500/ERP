@@ -26,9 +26,7 @@ SECRET_KEY = 'django-insecure-5zm*hq5#@p43-6uq)png8kszf)ppe8wuujk@(yd-eodnauzvi(
 DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.31.222', 'localhost', '127.0.0.1']
-
-ALLOWED_HOSTS = ['erp-home-pro-atcabubkcfftdhc6.southeastasia-01.azurewebsites.net']
-
+ALLOWED_HOSTS = ["erp-home-App.azurewebsites.net"]
 
 # Application definition
 INSTALLED_APPS = [
