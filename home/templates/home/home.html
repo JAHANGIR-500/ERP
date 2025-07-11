@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-{% load group_filters %}
-
 <html>
 <head>
     <title>erp UI</title>
@@ -32,18 +30,20 @@
     <h1>Home</h1> <!-- Keeps the title at the top -->
 
 <div class="container">
+        <a href="{% url 'construction_department' %}">
+            <button type="button">Construction Department</button>
+        </a>
+<a href="{% url 'design_department' %}">
+            <button type="button">Design Department</button>
+        </a>
 
-{% if request.user|in_group:"ConstructionOnly" %}
-    <a href="{% url 'construction_department' %}">
-        <button type="button">Construction Department</button>
-    </a>
-{% endif %}
-{% if request.user|in_group:"DesignOnly" %}
-    <a href="{% url 'design_department' %}">
-        <button type="button">Design Department</button>
-    </a>
-{% endif %}
+<a href="{% url 'inventory_department' %}">
+            <button type="button">Inventory Department</button>
+        </a>
+
+    </div>
 
 </body>
 </html>
+
 

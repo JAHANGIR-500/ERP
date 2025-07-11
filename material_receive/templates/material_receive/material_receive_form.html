@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if form.instance.id %}Edit{% else %}Create{% endif %} Material Receive</title>
+  <style>
+    body {
+      font-family: "Trebuchet MS", sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+   .form-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: left;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+ .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .form-control {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #34495e;
+      margin-bottom: 3px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 4px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      margin-bottom: -7px; 
+      background-color: #e6ffe6; /* Very light green */
+
+    }
+
+    /* Drop-down (select) fields */
+    select {
+    background-color: #d0f0ff; /* Light blue */
+
+    }
+
+    input:focus, select:focus {
+      border-color: #0078D4;
+    }
+
+.action-links {
+  display: flex;
+  gap: 18px; /* Adjust this to control spacing */
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Optional: aligns buttons vertically */
+}
+
+.action-links button {
+      background-color: #0078D4;
+      border: none;
+    }
+
+    .action-links button,
+    .action-links a {
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 5px;
+      color: #ffffff;
+      display: inline-block;
+    }
+
+    .action-links button:hover {
+      background-color: #005BB5;
+    }
+
+    .back-to-list {
+      background-color: #27ae60;
+    }
+
+    .back-to-list:hover {
+      background-color: #1e874b;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>{% if form.instance.id %}Edit{% else %}Create{% endif %} Material Receive</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+            <div style="color: red;">{{ field.errors|striptags }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <div class="action-links">
+        <button type="submit">{% if form.instance.id %}Update{% else %}Save{% endif %}</button>
+        <a href="{% url 'material_receive_list' %}" class="back-to-list">Back to List</a>
+
+      </div>
+    </form>
+  </div>
+
+
+  <script>
+    // 🔁 Auto-fill unit, type, and group when material changes
+    $(document).ready(function () {
+      $('#id_material_name').change(function () {
+        const materialId = $(this).val();
+        if (materialId) {
+          $.ajax({
+            url: "{% url 'get_material_details' %}",
+            data: { material_id: materialId },
+            success: function (data) {
+              $('#id_unit').val(data.unit);
+              $('#id_material_type').val(data.material_type);
+              $('#id_material_group').val(data.material_group);
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

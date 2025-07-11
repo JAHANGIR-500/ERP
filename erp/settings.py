@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-5zm*hq5#@p43-6uq)png8kszf)ppe8wuujk@(yd-eodnauzvi('
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.31.222', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = ['erp-home-pro-atcabubkcfftdhc6.southeastasia-01.azurewebsites.net']
 
 
 # Application definition
@@ -39,10 +41,15 @@ INSTALLED_APPS = [
     'home',
     'construction_department',
     'project',
+    'resource',
     'customer',
+    'material',
+    'material_receive',
     'supplier',
     'sales_bill',
+    'resource_receive',  # Your custom app
     'design_department',
+    'inventory_department',
     'task',
     'employee',
     'work_plan',
@@ -79,18 +86,40 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'erp.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'customer_db',
+        'NAME': 'material_receive_db',  # Database for Material Receive
         'USER': 'postgres',
         'PASSWORD': 'DEFGdefg2345',
         'HOST': 'localhost',
         'PORT': '5432',
-    }
+    },
+    'customer_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'customer_db',  # Database for Customer
+        'USER': 'postgres',
+        'PASSWORD': 'DEFGdefg2345',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+    'material_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'material_db',  # Database for Material
+        'USER': 'postgres',
+        'PASSWORD': 'DEFGdefg2345',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+    'task_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'task_db',  # Database for Task
+        'USER': 'postgres',
+        'PASSWORD': 'DEFGdefg2345',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [

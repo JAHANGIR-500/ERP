@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('home.urls')),  # Homepage
     path('construction-department/', include('construction_department.urls')),  # ✅ Add this line
     path('design-department/', include('design_department.urls')),  # ✅ Add this line
+    path('inventory-department/', include('inventory_department.urls')),  # ✅ Add this line
 ]
 
 
