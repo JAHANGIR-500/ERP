@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-5zm*hq5#@p43-6uq)png8kszf)ppe8wuujk@(yd-eodnauzvi(
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.31.222', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = ["erp-home-App.azurewebsites.net"]
+ALLOWED_HOSTS = ['DSC-django-App.azurewebsites.net']
 
 # Application definition
 INSTALLED_APPS = [
@@ -137,7 +136,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+import os
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erp.settings')
+
+
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
